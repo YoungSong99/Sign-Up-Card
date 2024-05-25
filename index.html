@@ -17,38 +17,41 @@
         <div class="formBox">
             <form id="signupForm">
                 <div class="formGroup">
-                    <input id="email" name="email" placeholder="Enter your email" required type="text">
+                    <input id="email" name="email" placeholder="Enter your email" required type="text" oninput="isFilled('email')">
+                    <div class="error" id="email_error">* The email format may be incorrect</div>
                 </div>
                 <div class="formGroup">
-                    <input id="name" name="name" placeholder="Enter your name" required type="text">
+                    <input id="name" name="name" placeholder="Enter your name" required type="text" oninput="isFilled('name')">
+                    <div class="error" id="name_error">* Please enter your name</div>
                 </div>
                 <div class="formGroup">
-                    <input id="password" name="password" placeholder="Enter your password" required type="password">
+                    <input id="password" name="password" placeholder="Enter your password" required type="password" oninput="isFilled('password')">
                 </div>
                 <div class="formGroup">
                     <input id="password-conf" name="password-conf" placeholder="Confirm your password" required
-                           type="password">
+                           type="password" oninput="isFilled('password-conf')">
+                    <div class="error" id="password_error">* Password does not match</div>
                 </div>
                 <div class="phone">
-                    <input id="phone1" name="phone" type="text" oninput="handlePhoneInput('phone1', 'phone2', 3)" maxlength="3">
+                    <input id="phone1" name="phone" type="text" oninput="handlePhoneInput('phone1', 'phone2', 3)" maxlength="3" oninput="isFilled('phone1')">
                     <div class="dash"><img src="img/dash.svg"></div>
-                    <input id="phone2" name="phone" type="text" oninput="handlePhoneInput('phone2', 'phone3', 4)" maxlength="4">
+                    <input id="phone2" name="phone" type="text" oninput="handlePhoneInput('phone2', 'phone3', 4)" maxlength="4" oninput="isFilled('phone2')">
                     <div class="dash"><img src="img/dash.svg"></div>
-                    <input id="phone3" name="phone" type="text" oninput="handlePhoneInput('phone3', null, 4)" maxlength="4">
+                    <input id="phone3" name="phone" type="text" oninput="handlePhoneInput('phone3', null, 4)" maxlength="4" oninput="isFilled('phone3')">
                 </div>
 
                 <div class="vertification">
                     <div>
                         <div id="token">000000</div>
-                        <button id="send_token" type="button" disabled="true" onclick="sendToken()">Send SMS Code</button>
+                        <button id="send_token" type="button" disabled="true" onclick="tokenTimer()">Send SMS Code</button>
                     </div>
                     <div>
                         <div><span id="min">03</span>:<span id="sec">00</span></div>
-                        <button id="complete_token" disabled="true">Completed</button>
+                        <button id="complete_token" type="button" disabled="true" onclick="tokenConfirmed()">Completed</button>
                     </div>
                 </div>
                 <div class="formGroup">
-                    <select id="region_dropdown" name="region">
+                    <select id="region_dropdown" name="region" oninput="isFilled('region_dropdown')">
                         <option disabled selected value="">Select your region</option>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
@@ -101,41 +104,44 @@
                         <option value="WI">Wisconsin</option>
                         <option value="WY">Wyoming</option>
                     </select>
+                    <div class="error" id="region_error">* Please select your region</div>
                 </div>
 
 
                 <div class="radioGroup">
                     <label for="Male">
-                        <input checked="checked" id="Male" name="gender" required type="radio">
+                        <input id="Male" name="Male" type="radio" oninput="isFilled('Male')">
                         <span class="radiobutton"></span>
                         Male
                     </label>
                     <label for="Female">
-                        <input id="Female" name="gender" required type="radio">
+                        <input id="Female" name="Female" type="radio" oninput="isFilled('Female')">
                         <span class="radiobutton"></span>
                         Female
                     </label>
                     <label for="Prefer not to say">
-                        <input id="Prefer not to say" name="gender" required type="radio">
+                        <input id="Prefer not to say" name="Prefer not to say" type="radio" oninput="isFilled('Prefer not to say')">
                         <span class="radiobutton"></span>
                         Prefer not to say
                     </label>
                     <label for="Other">
-                        <input id="Other" name="gender" required type="radio">
+                        <input id="Other" name="Other" type="radio" oninput="isFilled('Other')">
                         <span class="radiobutton"></span>
                         Other
                     </label>
                 </div>
+                <div class="error" id="agree_error">* Please select your gender</div>
 
                 <div class="checkInput">
                     <label for="agree">
-                        <input id="agree" name="agree" required type="checkbox">
+                        <input id="agree" name="agree" required type="checkbox" oninput="isFilled('agree')">
                     </label>
                     <div>I agree to the Terms of Service, the collection and use of personal information, and consent to
                         marketing activities.</div>
                 </div>
+                <div class="error" id="gender_error">* Please agree to sign up</div>
                 <div class="line"></div>
-                <button class="submit_btn" type="submit">Sign Up</button>
+                <button class="submit_btn" type="submit" id="submit_btn" disabled="true" onclick="submitVerification()">Sign Up</button>
             </form>
         </div>
     </div>
